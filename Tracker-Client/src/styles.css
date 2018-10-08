@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.jumbotron h1 {
+  color: #fff;
+}
+
+.col-md-2 {
+  margin-left: 2.5%;
+  width: 25%;
+  position: relative;
+  left: 7%;
+}
