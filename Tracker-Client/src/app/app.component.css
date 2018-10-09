@@ -23,9 +23,25 @@
 
 ul {
   list-style: none;
-  margin-top: 17%;
+  margin-top: 15%;
 }
 
 li {
   margin-top: 1%;
+}
+
+h4 {
+  position: relative;
+  top: 160%;
+  left: 16%;
+}
+
+#date {
+  position: relative;
+  top: 180%;
+  left: 50%;
+}
+
+.form-control {
+  font-size: small;
 }
