@@ -1,0 +1,31 @@
+.jumbotron h1 {
+  color: white;
+}
+
+#startbtn, #stopbtn, #resumebtn {
+  margin-left: 2.5%;
+  width: 25%;
+  color: white;
+  position: relative;
+  left: 19%;
+}
+
+#timer {
+  font-size: 700%;
+}
+
+#taskdescription {
+  margin-top: 5%;
+  width: 85%;
+  position: relative;
+  left: 8%;
+}
+
+ul {
+  list-style: none;
+  margin-top: 17%;
+}
+
+li {
+  margin-top: 1%;
+}

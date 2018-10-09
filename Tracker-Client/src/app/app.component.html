@@ -8,14 +8,23 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <p class="text-center">{{hour}}:{{minute}}:{{second}}</p>
+      <p class="text-center" id="timer">{{hour}}:{{minute}}:{{second}}</p>
       <div class="row">
-        <button class="btn btn-primary col-md-2" (click)='startTimer()'>START</button>
-        <button class="btn btn-danger col-md-2" (click)='pauseTimer()'>STOP</button>
-        <button class="btn btn-warning col-md-2" (click)='resumeTimer()'>RESUME</button>
+        <button class="btn btn-primary col-md-2" id="startbtn" (click)='startTimer()'>START</button>
+        <button class="btn btn-danger col-md-2" id="stopbtn" (click)='pauseTimer()'>STOP</button>
+        <button class="btn btn-warning col-md-2" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control rounded-0" id="taskdescription" rows="5"
+                  placeholder="Describe the task here..."></textarea>
       </div>
     </div>
     <div class="col-md-6">
+      <ul class="heroes">
+        <li *ngFor="let task of tasks">
+          <app-task [task]="task"></app-task>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

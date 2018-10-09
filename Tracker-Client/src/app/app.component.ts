@@ -11,6 +11,11 @@ export class AppComponent {
   hour = '00';
   interval;
 
+  tasks = [
+    { id: '1', start: '07:00:00', end: '08:00:00', description: 'Breakfast' },
+    { id: '2', start: '11:00:00', end: '13:00:00', description: 'Lunch' }
+  ];
+
   startTimer() {
     this.pauseTimer();
     this.interval = setInterval(() => {
