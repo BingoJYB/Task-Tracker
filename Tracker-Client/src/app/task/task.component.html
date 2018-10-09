@@ -2,10 +2,10 @@
   <h6 class="card-header border border-light">
     <i class="fa fa-plus-square" *ngIf="isCollapsed"
        (click)="isCollapsed = !isCollapsed"
-       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id" title="show description"></i>
+       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
     <i class="fa fa-minus-square" *ngIf="!isCollapsed"
        (click)="isCollapsed = !isCollapsed"
-       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id" title="hide description"></i>
+       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
     <strong>Start:</strong> {{task.start}}
     <strong>End:</strong> {{task.end}}
   </h6>

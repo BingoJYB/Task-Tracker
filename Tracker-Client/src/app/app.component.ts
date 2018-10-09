@@ -10,11 +10,16 @@ export class AppComponent {
   minute = '00';
   hour = '00';
   interval;
+  selectedDate;
 
-  tasks = [
-    { id: '1', start: '07:00:00', end: '08:00:00', description: 'Breakfast' },
-    { id: '2', start: '11:00:00', end: '13:00:00', description: 'Lunch' }
+  TASKS = [
+    {id: '1', start: '10/09/2018 07:00:00', end: '10/09/2018 08:00:00', description: 'Breakfast'},
+    {id: '2', start: '10/09/2018 11:00:00', end: '10/09/2018 12:00:00', description: 'Lunch'},
+    {id: '3', start: '10/08/2018 15:00:00', end: '10/08/2018 16:00:00', description: 'Rest'},
+    {id: '4', start: '10/07/2018 18:00:00', end: '10/07/2018 19:00:00', description: 'Dinner'},
+    {id: '5', start: '10/07/2018 21:00:00', end: '10/07/2018 23:00:00', description: 'Watch TV'}
   ];
+  tasks = Object.assign([], this.TASKS);
 
   startTimer() {
     this.pauseTimer();
@@ -58,5 +63,19 @@ export class AppComponent {
     this.minute = '00';
     this.hour = '00';
     this.pauseTimer();
+  }
+
+  filterTask(selectedDate) {
+    if (selectedDate === undefined || selectedDate === '') {
+      this.tasks = this.TASKS;
+    } else {
+      this.tasks = this.TASKS.filter(task => {
+        const date = new Date(task.start.split(' ')[0]);
+        selectedDate = new Date(selectedDate);
+        return date.getFullYear() === selectedDate.getFullYear()
+          && date.getMonth() === selectedDate.getMonth()
+          && date.getDate() === selectedDate.getDate();
+      });
+    }
   }
 }

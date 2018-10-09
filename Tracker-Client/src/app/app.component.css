@@ -23,23 +23,28 @@
 
 ul {
   list-style: none;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 li {
   margin-top: 1%;
 }
 
-h4 {
+h3 {
   position: relative;
-  top: 160%;
-  left: 16%;
+  top: 100%;
+  left: 20%;
+}
+
+label {
+  position: relative;
+  top: 130%;
+  left: 30%;
 }
 
 #date {
   position: relative;
-  top: 180%;
-  left: 50%;
+  top: 120%;
 }
 
 .form-control {
