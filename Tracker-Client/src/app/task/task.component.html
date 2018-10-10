@@ -1,15 +1,15 @@
 <div class="card bg-light text-dark">
-  <h6 class="card-header border border-light">
-    <i class="fa fa-plus-square" *ngIf="isCollapsed"
-       (click)="isCollapsed = !isCollapsed"
-       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
-    <i class="fa fa-minus-square" *ngIf="!isCollapsed"
-       (click)="isCollapsed = !isCollapsed"
-       aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
-    <strong>Start:</strong> {{task.start}}
-    <strong>End:</strong> {{task.end}}
-  </h6>
-  <div class="card-text collapse" id={{task.id}}>
-    <strong>Description:</strong> {{task.description}}
-  </div>
+    <h6 class="card-header border border-light">
+        <i class="fa fa-plus-square" *ngIf="isCollapsed"
+           (click)="isCollapsed = !isCollapsed"
+           aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
+        <i class="fa fa-minus-square" *ngIf="!isCollapsed"
+           (click)="isCollapsed = !isCollapsed"
+           aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task.id"></i>
+        <strong>Start:</strong> {{task.start}}
+        <strong>End:</strong> {{task.end}}
+    </h6>
+    <div class="card-text collapse" id={{task.id}}>
+        <strong>Description:</strong> {{task.description}}
+    </div>
 </div>

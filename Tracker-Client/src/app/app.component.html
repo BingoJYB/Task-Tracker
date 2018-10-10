@@ -1,42 +1,43 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <div style="background-color:deepskyblue" class="jumbotron">
-    <h1>Task Tracker app</h1>
-  </div>
+    <div style="background-color:deepskyblue" class="jumbotron">
+        <h1>Task Tracker app</h1>
+    </div>
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <p class="text-center" id="timer">{{hour}}:{{minute}}:{{second}}</p>
-      <div class="row">
-        <button class="btn btn-primary col-md-2" id="startbtn" (click)='startTimer()'>START</button>
-        <button class="btn btn-danger col-md-2" id="stopbtn" (click)='pauseTimer()'>STOP</button>
-        <button class="btn btn-warning col-md-2" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
-      </div>
-      <div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-center" id="timer">{{hour}}:{{minute}}:{{second}}</p>
+            <div class="row">
+                <button class="btn btn-primary col-md-2" id="startbtn" (click)='startTimer()'>START</button>
+                <button class="btn btn-danger col-md-2" id="stopbtn" (click)='pauseTimer()'>STOP</button>
+                <button class="btn btn-warning col-md-2" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
+            </div>
+            <div class="form-group">
         <textarea class="form-control rounded-0" id="taskdescription" rows="5"
                   placeholder="Describe the task here..."></textarea>
-      </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-5">
+                    <h3>Past Task List</h3>
+                </div>
+                <div class="col-md-3">
+                    <label><strong>Filter by date:</strong> </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="date" id="date" [(ngModel)]="selectedDate"
+                           (input)="filterTask($event.target.value)">
+                </div>
+            </div>
+            <ul class="tasks">
+                <li *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: page }">
+                    <app-task [task]="task"></app-task>
+                </li>
+            </ul>
+            <pagination-controls (pageChange)="page = $event" align="right"></pagination-controls>
+        </div>
     </div>
-    <div class="col-md-6">
-      <div class="row">
-        <div class="col-md-5">
-          <h3>Past Task List</h3>
-        </div>
-        <div class="col-md-3">
-          <label><strong>Filter by date:</strong> </label>
-        </div>
-        <div class="col-md-4">
-          <input class="form-control" type="date" id="date" [(ngModel)]="selectedDate"
-                 (input)="filterTask($event.target.value)">
-        </div>
-      </div>
-      <ul class="tasks">
-        <li *ngFor="let task of tasks">
-          <app-task [task]="task"></app-task>
-        </li>
-      </ul>
-    </div>
-  </div>
 </div>
