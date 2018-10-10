@@ -40,7 +40,7 @@
                 </div>
             </div>
             <ul class="tasks">
-                <li *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: page }">
+                <li *ngFor="let task of display | paginate: { itemsPerPage: 5, currentPage: page }">
                     <app-task [task]="task"></app-task>
                 </li>
             </ul>
