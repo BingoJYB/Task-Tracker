@@ -9,9 +9,11 @@ export class AppComponent {
     second = '00';
     minute = '00';
     hour = '00';
+    page: number = 1;
     interval;
     selectedDate;
-    page: number = 1;
+    description;
+    isTextDisabled = false;
 
     TASKS = [
         {id: '1', start: '10/09/2018 07:00:00', end: '10/09/2018 08:00:00', description: 'Breakfast'},
@@ -26,7 +28,8 @@ export class AppComponent {
     tasks = Object.assign([], this.TASKS);
 
     startTimer() {
-        this.pauseTimer();
+        this.resumeTimer();
+        this.isTextDisabled = true;
         this.interval = setInterval(() => {
             let s = +this.second;
             let m = +this.minute;
@@ -59,6 +62,8 @@ export class AppComponent {
     }
 
     pauseTimer() {
+        this.isTextDisabled = false;
+        this.description = '';
         clearInterval(this.interval);
     }
 
@@ -66,7 +71,8 @@ export class AppComponent {
         this.second = '00';
         this.minute = '00';
         this.hour = '00';
-        this.pauseTimer();
+        this.isTextDisabled = false;
+        clearInterval(this.interval);
     }
 
     filterTask(selectedDate) {
