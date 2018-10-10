@@ -10,13 +10,21 @@
         <div class="col-md-6">
             <p class="text-center" id="timer">{{hour}}:{{minute}}:{{second}}</p>
             <div class="row">
-                <button class="btn btn-primary col-md-2" id="startbtn" (click)='startTimer()'>START
+                <button class="btn btn-primary col-md-2" id="startbtn"
+                        (click)='startTimer(taskdescription.valid)'>START
                 </button>
                 <button class="btn btn-danger col-md-2" id="stopbtn" (click)='pauseTimer()'>STOP</button>
                 <button class="btn btn-warning col-md-2" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
             </div>
-            <input class="form-control form-control-lg rounded-0" id="taskdescription"
-                   placeholder="Describe the task here..." [(ngModel)]="description" [readonly]="isTextDisabled">
+            <input class="form-control form-control-lg rounded-0" name="taskdescription" required
+                   #taskdescription="ngModel" placeholder="Describe the task here..." [(ngModel)]="description"
+                   [readonly]="isTextDisabled">
+            <div *ngIf="taskdescription.invalid && isStartbtnClicked"
+                 class="alert alert-danger">
+                <div [hidden]="!taskdescription.errors.required">
+                    Task description is required!
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <div class="row">

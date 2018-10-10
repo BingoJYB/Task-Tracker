@@ -14,6 +14,7 @@ export class AppComponent {
     selectedDate;
     description;
     isTextDisabled = false;
+    isStartbtnClicked = false;
 
     TASKS = [
         {id: '1', start: '10/09/2018 07:00:00', end: '10/09/2018 08:00:00', description: 'Breakfast'},
@@ -27,42 +28,48 @@ export class AppComponent {
     ];
     tasks = Object.assign([], this.TASKS);
 
-    startTimer() {
-        this.resumeTimer();
-        this.isTextDisabled = true;
-        this.interval = setInterval(() => {
-            let s = +this.second;
-            let m = +this.minute;
-            let h = +this.hour;
-            s++;
-            if (s > 59) {
-                s = 0;
-                m++;
-            }
-            if (m > 59) {
-                m = 0;
-                h++;
-            }
-            if (s < 10) {
-                this.second = '0' + String(s);
-            } else {
-                this.second = String(s);
-            }
-            if (m < 10) {
-                this.minute = '0' + String(m);
-            } else {
-                this.minute = String(m);
-            }
-            if (h < 10) {
-                this.hour = '0' + String(h);
-            } else {
-                this.hour = String(h);
-            }
-        }, 1000);
+    startTimer(isValid) {
+        if (isValid) {
+            this.resumeTimer();
+            this.isTextDisabled = true;
+            this.isStartbtnClicked = true;
+            this.interval = setInterval(() => {
+                let s = +this.second;
+                let m = +this.minute;
+                let h = +this.hour;
+                s++;
+                if (s > 59) {
+                    s = 0;
+                    m++;
+                }
+                if (m > 59) {
+                    m = 0;
+                    h++;
+                }
+                if (s < 10) {
+                    this.second = '0' + String(s);
+                } else {
+                    this.second = String(s);
+                }
+                if (m < 10) {
+                    this.minute = '0' + String(m);
+                } else {
+                    this.minute = String(m);
+                }
+                if (h < 10) {
+                    this.hour = '0' + String(h);
+                } else {
+                    this.hour = String(h);
+                }
+            }, 1000);
+        } else {
+            this.isStartbtnClicked = true;
+        }
     }
 
     pauseTimer() {
         this.isTextDisabled = false;
+        this.isStartbtnClicked = false;
         this.description = '';
         clearInterval(this.interval);
     }
@@ -72,6 +79,7 @@ export class AppComponent {
         this.minute = '00';
         this.hour = '00';
         this.isTextDisabled = false;
+        this.isStartbtnClicked = false;
         clearInterval(this.interval);
     }
 
