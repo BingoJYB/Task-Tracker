@@ -6,6 +6,7 @@ let mongoClient = require('mongodb').MongoClient;
 
 let getRouter = require('./routes/get');
 let createRouter = require('./routes/post');
+let deleteRouter = require('./routes/delete');
 
 let app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/tracker/api/v1/get_tasks', getRouter);
 app.use('/tracker/api/v1/create_task', createRouter);
+app.use('/tracker/api/v1/delete_task', deleteRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
