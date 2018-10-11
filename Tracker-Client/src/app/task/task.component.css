@@ -6,3 +6,8 @@
     position: relative;
     left: 8%;
 }
+
+i[title='Remove Task'] {
+    position: relative;
+    left: 10%;
+}

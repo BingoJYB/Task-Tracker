@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
     page = 1;
     isTextDisabled = false;
     isStartbtnClicked = false;
+    key = 'startDate';
+    reverse = true;
     startDate: String;
     endDate: String;
     description: String;
@@ -81,7 +83,7 @@ export class AppComponent implements OnInit {
             description: this.description
         }).subscribe(tasks => {
             this.tasks = tasks;
-            this.display = Object.assign([], this.tasks);
+            this.filterTask(this.selectedDate);
             this.isTextDisabled = false;
             this.isStartbtnClicked = false;
             this.description = '';
@@ -95,6 +97,13 @@ export class AppComponent implements OnInit {
         this.isTextDisabled = false;
         this.isStartbtnClicked = false;
         clearInterval(this.interval);
+    }
+
+    deleteTask(id) {
+        this.httpService.deleteTask(id).subscribe(tasks => {
+            this.tasks = tasks;
+            this.filterTask(this.selectedDate);
+        });
     }
 
     filterTask(selectedDate) {

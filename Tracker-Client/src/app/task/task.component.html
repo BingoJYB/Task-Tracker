@@ -8,6 +8,7 @@
            aria-hidden="true" data-toggle="collapse" [attr.data-target]="'#' + task._id"></i>
         <strong>Start:</strong> {{task.startDate}}
         <strong>End:</strong> {{task.endDate}}
+        <i class="fa fa-trash" aria-hidden="true" title="Remove Task" (click)="popId(task._id)"></i>
     </h6>
     <div class="card-text collapse" id={{task._id}}>
         <strong>Description:</strong> {{task.description}}

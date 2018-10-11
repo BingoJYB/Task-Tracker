@@ -40,8 +40,8 @@
                 </div>
             </div>
             <ul class="tasks">
-                <li *ngFor="let task of display | paginate: { itemsPerPage: 5, currentPage: page }">
-                    <app-task [task]="task"></app-task>
+                <li *ngFor="let task of display | orderBy: key : reverse | paginate: { itemsPerPage: 5, currentPage: page }">
+                    <app-task [task]="task" (getId)="deleteTask($event)"></app-task>
                 </li>
             </ul>
             <pagination-controls (pageChange)="page = $event" align="right"></pagination-controls>

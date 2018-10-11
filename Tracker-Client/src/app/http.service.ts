@@ -7,8 +7,7 @@ import {Task} from './task';
 
 @Injectable()
 export class HttpService {
-    getURL = 'http://localhost:3000/tracker/api/v1/get_tasks';
-    postURL = 'http://localhost:3000/tracker/api/v1/create_task';
+    baseURL = 'http://localhost:3000/tracker/api/v1';
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
@@ -19,14 +18,21 @@ export class HttpService {
     }
 
     getTasks(): Observable<Task[]> {
-        return this.http.get(this.getURL, this.httpOptions)
+        return this.http.get(`${this.baseURL}/get_tasks`, this.httpOptions)
             .catch((err) => {
                 return Observable.throw(err)
             });
     }
 
     addTask(task: Task): Observable<Task[]> {
-        return this.http.post<Task>(this.postURL, task, this.httpOptions)
+        return this.http.post<Task>(`${this.baseURL}/create_task`, task, this.httpOptions)
+            .catch((err) => {
+                return Observable.throw(err)
+            });
+    }
+
+    deleteTask(id: String): Observable<Task[]> {
+        return this.http.delete(`${this.baseURL}/delete_task/${id}`, this.httpOptions)
             .catch((err) => {
                 return Observable.throw(err)
             });
