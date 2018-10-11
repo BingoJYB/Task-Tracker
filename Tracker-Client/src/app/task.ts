@@ -1,5 +1,8 @@
 export class Task {
     startDate: Date;
     endDate: Date;
-    description: string;
+    description: String;
+
+    constructor(startDate: Date, endDate: Date, description: String) {
+    };
 }

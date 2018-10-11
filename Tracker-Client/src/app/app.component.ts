@@ -1,39 +1,43 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Task} from './task';
+import {HttpService} from "./http.service";
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     second = '00';
     minute = '00';
     hour = '00';
-    interval;
-    selectedDate;
-    description;
+    interval: any;
+    selectedDate: Date;
     page = 1;
     isTextDisabled = false;
     isStartbtnClicked = false;
+    startDate: Date;
+    endDate: Date;
+    description: String;
+    tasks: Task[];
+    display: Task[];
 
-    tasks = [
-        {id: '1', start: '10/09/2018 07:00:00', end: '10/09/2018 08:00:00', description: 'Breakfast'},
-        {id: '2', start: '10/09/2018 11:00:00', end: '10/09/2018 12:00:00', description: 'Lunch'},
-        {id: '3', start: '10/08/2018 15:00:00', end: '10/08/2018 16:00:00', description: 'Rest'},
-        {id: '4', start: '10/07/2018 18:00:00', end: '10/07/2018 19:00:00', description: 'Dinner'},
-        {id: '5', start: '10/07/2018 21:00:00', end: '10/07/2018 23:00:00', description: 'Watch TV'},
-        {id: '6', start: '10/07/2018 21:00:00', end: '10/07/2018 23:00:00', description: 'Watch TV'},
-        {id: '7', start: '10/07/2018 21:00:00', end: '10/07/2018 23:00:00', description: 'Watch TV'},
-        {id: '8', start: '10/07/2018 21:00:00', end: '10/07/2018 23:00:00', description: 'Watch TV'}
-    ];
-    display = Object.assign([], this.tasks);
+    constructor(private httpService: HttpService) {
+    }
+
+    ngOnInit() {
+        this.httpService.getTasks().subscribe(tasks => {
+            this.tasks = tasks;
+            this.display = Object.assign([], this.tasks);
+        });
+    }
 
     startTimer(isValid) {
         if (isValid) {
             this.resumeTimer();
             this.isTextDisabled = true;
             this.isStartbtnClicked = true;
+            this.startDate = new Date();
             this.interval = setInterval(() => {
                 let s = +this.second;
                 let m = +this.minute;
@@ -69,10 +73,15 @@ export class AppComponent {
     }
 
     pauseTimer() {
-        this.isTextDisabled = false;
-        this.isStartbtnClicked = false;
-        this.description = '';
+        this.endDate = new Date();
         clearInterval(this.interval);
+        this.httpService.addTask(new Task(this.startDate, this.endDate, this.description)).subscribe(tasks => {
+            this.tasks = tasks;
+            this.display = Object.assign([], this.tasks);
+            this.isTextDisabled = false;
+            this.isStartbtnClicked = false;
+            this.description = '';
+        });
     }
 
     resumeTimer() {
@@ -89,7 +98,7 @@ export class AppComponent {
             this.display = this.tasks;
         } else {
             this.display = this.tasks.filter(task => {
-                const date = new Date(task.start.split(' ')[0]);
+                const date = new Date(String(task.startDate).split(' ')[0]);
                 selectedDate = new Date(selectedDate);
                 return date.getFullYear() === selectedDate.getFullYear()
                     && date.getMonth() === selectedDate.getMonth()

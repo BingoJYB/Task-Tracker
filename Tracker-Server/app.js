@@ -10,11 +10,10 @@ let createRouter = require('./routes/post');
 let app = express();
 
 // Set up database
-let mydb;
 mongoClient.connect('mongodb://localhost:27017/mydb', {useNewUrlParser: true}, (err, db) => {
     if (err) throw err;
 
-    mydb = db.db('mydb');
+    let mydb = db.db('mydb');
     app.set('mydb', mydb);
 
     mydb.createCollection('tasks', (err, res) => {
@@ -22,6 +21,10 @@ mongoClient.connect('mongodb://localhost:27017/mydb', {useNewUrlParser: true}, (
         console.log('Database Connected!');
     });
 });
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
