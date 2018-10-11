@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
     page = 1;
     isTextDisabled = false;
     isStartbtnClicked = false;
-    startDate: Date;
-    endDate: Date;
+    startDate: String;
+    endDate: String;
     description: String;
     tasks: Task[];
     display: Task[];
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
             this.resumeTimer();
             this.isTextDisabled = true;
             this.isStartbtnClicked = true;
-            this.startDate = new Date();
+            this.startDate = this.haveNiceDateFormat(new Date());
             this.interval = setInterval(() => {
                 let s = +this.second;
                 let m = +this.minute;
@@ -73,9 +73,13 @@ export class AppComponent implements OnInit {
     }
 
     pauseTimer() {
-        this.endDate = new Date();
+        this.endDate = this.haveNiceDateFormat(new Date());
         clearInterval(this.interval);
-        this.httpService.addTask(new Task(this.startDate, this.endDate, this.description)).subscribe(tasks => {
+        this.httpService.addTask({
+            startDate: this.startDate,
+            endDate: this.endDate,
+            description: this.description
+        }).subscribe(tasks => {
             this.tasks = tasks;
             this.display = Object.assign([], this.tasks);
             this.isTextDisabled = false;
@@ -98,12 +102,23 @@ export class AppComponent implements OnInit {
             this.display = this.tasks;
         } else {
             this.display = this.tasks.filter(task => {
-                const date = new Date(String(task.startDate).split(' ')[0]);
+                const date = new Date(task.startDate.split(' ')[0]);
                 selectedDate = new Date(selectedDate);
                 return date.getFullYear() === selectedDate.getFullYear()
                     && date.getMonth() === selectedDate.getMonth()
                     && date.getDate() === selectedDate.getDate();
             });
         }
+    }
+
+    haveNiceDateFormat(timestamp) {
+        let yyyy = timestamp.getFullYear().toString();
+        let MM = (timestamp.getMonth() + 1).toString();
+        let dd = timestamp.getDate().toString();
+        let hh = timestamp.getHours().toString();
+        let mm = timestamp.getMinutes().toString();
+        let ss = timestamp.getSeconds().toString();
+        return (MM[1] ? MM : "0" + MM[0]) + '/' + (dd[1] ? dd : "0" + dd[0]) + '/' + yyyy + ' ' + (hh[1] ? hh : "0" +
+            hh[0]) + ':' + (mm[1] ? mm : "0" + mm[0]) + ':' + (ss[1] ? ss : "0" + ss[0]);
     }
 }
