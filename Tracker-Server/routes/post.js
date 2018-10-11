@@ -3,8 +3,10 @@ let router = express.Router();
 
 router.post('/', (req, res, next) => {
     // create a task, information comes from AJAX request from Angular
-    req.app.get('mydb').collection('tasks').insert({
-        start: req.body.start
+    req.app.get('mydb').collection('tasks').insertOne({
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        description: req.body.description
     }, (err, task) => {
         if (err)
             res.send(err);
