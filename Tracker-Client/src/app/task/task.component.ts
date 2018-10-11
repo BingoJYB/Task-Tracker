@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit {
     ngOnInit() {
     }
 
+    // pass id from child component to parent component
     popId(id) {
         this.getId.emit(id);
     }
