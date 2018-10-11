@@ -10,7 +10,7 @@ router.delete('/:id', (req, res, next) => {
         if (err)
             res.send(err);
 
-        // get and return all the tasks after you delete another
+        // get and return all the tasks after you delete one task
         req.app.get('mydb').collection('tasks').find({}).toArray((err, tasks) => {
             if (err)
                 res.send(err);
