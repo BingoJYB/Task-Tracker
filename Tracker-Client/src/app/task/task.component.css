@@ -1,3 +1,7 @@
+.card {
+    border: none;
+}
+
 .card-text {
     position: relative;
     left: 8%;
