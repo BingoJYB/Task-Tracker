@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     page = 1;
     isTextDisabled = false;
     isStartbtnClicked = false;
+    started = false;
     key = 'startDate';
     reverse = true;
     startDate: String;
@@ -35,45 +36,49 @@ export class AppComponent implements OnInit {
     }
 
     startTimer(isValid) {
-        if (isValid && this.isStartbtnClicked === false) {
-            this.resumeTimer();
-            this.isTextDisabled = true;
+        if (isValid) {
+            if (this.started === false) {
+                this.resumeTimer();
+                this.isTextDisabled = true;
+                this.started = true;
+                this.startDate = this.haveNiceDateFormat(new Date());
+                this.interval = setInterval(() => {
+                    let s = +this.second;
+                    let m = +this.minute;
+                    let h = +this.hour;
+                    s++;
+                    if (s > 59) {
+                        s = 0;
+                        m++;
+                    }
+                    if (m > 59) {
+                        m = 0;
+                        h++;
+                    }
+                    if (s < 10) {
+                        this.second = '0' + String(s);
+                    } else {
+                        this.second = String(s);
+                    }
+                    if (m < 10) {
+                        this.minute = '0' + String(m);
+                    } else {
+                        this.minute = String(m);
+                    }
+                    if (h < 10) {
+                        this.hour = '0' + String(h);
+                    } else {
+                        this.hour = String(h);
+                    }
+                }, 1000);
+            }
+        } else {
             this.isStartbtnClicked = true;
-            this.startDate = this.haveNiceDateFormat(new Date());
-            this.interval = setInterval(() => {
-                let s = +this.second;
-                let m = +this.minute;
-                let h = +this.hour;
-                s++;
-                if (s > 59) {
-                    s = 0;
-                    m++;
-                }
-                if (m > 59) {
-                    m = 0;
-                    h++;
-                }
-                if (s < 10) {
-                    this.second = '0' + String(s);
-                } else {
-                    this.second = String(s);
-                }
-                if (m < 10) {
-                    this.minute = '0' + String(m);
-                } else {
-                    this.minute = String(m);
-                }
-                if (h < 10) {
-                    this.hour = '0' + String(h);
-                } else {
-                    this.hour = String(h);
-                }
-            }, 1000);
         }
     }
 
     pauseTimer() {
-        if (this.isStartbtnClicked === true) {
+        if (this.started === true) {
             this.endDate = this.haveNiceDateFormat(new Date());
             clearInterval(this.interval);
             this.httpService.addTask({
@@ -84,6 +89,7 @@ export class AppComponent implements OnInit {
                 this.tasks = tasks;
                 this.filterTask(this.selectedDate);
                 this.isTextDisabled = false;
+                this.started = false;
                 this.isStartbtnClicked = false;
                 this.description = '';
             });
@@ -95,6 +101,7 @@ export class AppComponent implements OnInit {
         this.minute = '00';
         this.hour = '00';
         this.isTextDisabled = false;
+        this.started = false;
         this.isStartbtnClicked = false;
         clearInterval(this.interval);
     }

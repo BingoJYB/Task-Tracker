@@ -23,6 +23,9 @@
                  class="alert alert-danger">
                 <div [hidden]="!taskdescription.errors.required">
                     Task description is required!
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="isStartbtnClicked=false">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         </div>
