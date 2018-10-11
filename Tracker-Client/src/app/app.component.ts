@@ -8,26 +8,33 @@ import {HttpService} from "./http.service";
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+    // timer
     second = '00';
     minute = '00';
     hour = '00';
     interval: any;
+    // filter
     selectedDate: Date;
+    // pagination
     page = 1;
     isTextDisabled = false;
     isStartbtnClicked = false;
     started = false;
+    // sort
     key = 'startDate';
     reverse = true;
+    // Task object fields
     startDate: String;
     endDate: String;
     description: String;
+    // storage
     tasks: Task[];
     display: Task[];
 
     constructor(private httpService: HttpService) {
     }
 
+    // get all tasks from db at the beginning
     ngOnInit() {
         this.httpService.getTasks().subscribe(tasks => {
             this.tasks = tasks;
@@ -35,6 +42,7 @@ export class AppComponent implements OnInit {
         });
     }
 
+    // if description exists, start timer
     startTimer(isValid) {
         if (isValid) {
             if (this.started === false) {
@@ -77,6 +85,7 @@ export class AppComponent implements OnInit {
         }
     }
 
+    // stop timer and create new task
     pauseTimer() {
         if (this.started === true) {
             this.endDate = this.haveNiceDateFormat(new Date());
@@ -96,6 +105,7 @@ export class AppComponent implements OnInit {
         }
     }
 
+    // resume the timer
     resumeTimer() {
         this.second = '00';
         this.minute = '00';
@@ -106,6 +116,7 @@ export class AppComponent implements OnInit {
         clearInterval(this.interval);
     }
 
+    // delete a task by id
     deleteTask(id) {
         this.httpService.deleteTask(id).subscribe(tasks => {
             this.tasks = tasks;
@@ -113,6 +124,7 @@ export class AppComponent implements OnInit {
         });
     }
 
+    // filter all tasks by start date
     filterTask(selectedDate) {
         if (selectedDate === undefined || selectedDate === '') {
             this.display = this.tasks;
@@ -127,6 +139,7 @@ export class AppComponent implements OnInit {
         }
     }
 
+    // format the timestamp as mm/dd/yyyy hh:mm:ss
     haveNiceDateFormat(timestamp) {
         let yyyy = timestamp.getFullYear().toString();
         let MM = (timestamp.getMonth() + 1).toString();

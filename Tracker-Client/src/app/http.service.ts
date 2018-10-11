@@ -17,6 +17,7 @@ export class HttpService {
     constructor(private http: HttpClient) {
     }
 
+    // call get method to get all tasks in the database
     getTasks(): Observable<Task[]> {
         return this.http.get(`${this.baseURL}/get_tasks`, this.httpOptions)
             .catch((err) => {
@@ -24,6 +25,7 @@ export class HttpService {
             });
     }
 
+    // call post method to add one task to database and get all tasks from database
     addTask(task: Task): Observable<Task[]> {
         return this.http.post<Task>(`${this.baseURL}/create_task`, task, this.httpOptions)
             .catch((err) => {
@@ -31,6 +33,7 @@ export class HttpService {
             });
     }
 
+    // call delete method to delete a specific task and get all tasks from database
     deleteTask(id: String): Observable<Task[]> {
         return this.http.delete(`${this.baseURL}/delete_task/${id}`, this.httpOptions)
             .catch((err) => {
