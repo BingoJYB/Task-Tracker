@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     }
 
     startTimer(isValid) {
-        if (isValid) {
+        if (isValid && this.isStartbtnClicked === false) {
             this.resumeTimer();
             this.isTextDisabled = true;
             this.isStartbtnClicked = true;
@@ -69,25 +69,25 @@ export class AppComponent implements OnInit {
                     this.hour = String(h);
                 }
             }, 1000);
-        } else {
-            this.isStartbtnClicked = true;
         }
     }
 
     pauseTimer() {
-        this.endDate = this.haveNiceDateFormat(new Date());
-        clearInterval(this.interval);
-        this.httpService.addTask({
-            startDate: this.startDate,
-            endDate: this.endDate,
-            description: this.description
-        }).subscribe(tasks => {
-            this.tasks = tasks;
-            this.filterTask(this.selectedDate);
-            this.isTextDisabled = false;
-            this.isStartbtnClicked = false;
-            this.description = '';
-        });
+        if (this.isStartbtnClicked === true) {
+            this.endDate = this.haveNiceDateFormat(new Date());
+            clearInterval(this.interval);
+            this.httpService.addTask({
+                startDate: this.startDate,
+                endDate: this.endDate,
+                description: this.description
+            }).subscribe(tasks => {
+                this.tasks = tasks;
+                this.filterTask(this.selectedDate);
+                this.isTextDisabled = false;
+                this.isStartbtnClicked = false;
+                this.description = '';
+            });
+        }
     }
 
     resumeTimer() {
