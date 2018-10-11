@@ -4,7 +4,7 @@ let router = express.Router();
 
 router.delete('/:id', (req, res, next) => {
     // delete a task, information comes from AJAX request from Angular
-    req.app.get('mydb').collection('tasks').remove({
+    req.app.get('mydb').collection('tasks').deleteOne({
         _id: new ObjectId(req.params.id)
     }, (err, task) => {
         if (err)
