@@ -1,0 +1,18 @@
+version: "2"
+services:
+  client:
+    image: bingojyb/time-tracker-client:0.0.1
+    ports:
+      - "4200:4200"
+
+  server:
+    image: bingojyb/time-tracker-server:0.0.1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
