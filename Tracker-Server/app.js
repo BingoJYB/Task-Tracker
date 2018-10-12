@@ -1,7 +1,6 @@
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
-let cookieParser = require('cookie-parser');
 let mongoClient = require('mongodb').MongoClient;
 
 let getRouter = require('./routes/get');
@@ -29,8 +28,15 @@ app.set('view engine', 'pug');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Cross Origin middleware
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.use('/tracker/api/v1/get_tasks', getRouter);
 app.use('/tracker/api/v1/create_task', createRouter);
