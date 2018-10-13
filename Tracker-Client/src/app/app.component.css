@@ -4,8 +4,15 @@
 
 #startbtn, #stopbtn, #resumebtn {
     margin-top: 3%;
-    width: 30%;
     color: white;
+}
+
+.btn-group.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1;
 }
 
 #taskList {
