@@ -8,12 +8,12 @@
     <div class="row">
         <div class="col-md-6" id="timer">
             <h1 class="display-1 text-center font-weight-normal">{{hour}}:{{minute}}:{{second}}</h1>
-            <div class="btn-group justify-content-md-center special" role="group">
-                <button class="btn btn-primary col-md-2 rounded" id="startbtn"
+            <div class="row justify-content-md-center">
+                <button class="btn btn-primary col-md-2" id="startbtn"
                         (click)='startTimer(taskdescription.valid)'>START
                 </button>
-                <button class="btn btn-danger col-md-2 rounded" id="stopbtn" (click)='pauseTimer()'>STOP</button>
-                <button class="btn btn-warning col-md-2 rounded" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
+                <button class="btn btn-danger col-md-2" id="stopbtn" (click)='pauseTimer()'>STOP</button>
+                <button class="btn btn-warning col-md-2" id="resumebtn" (click)='resumeTimer()'>RESUME</button>
             </div>
             <div class="row justify-content-md-center">
                 <input class="form-control form-control-lg rounded-0" name="taskdescription" required
