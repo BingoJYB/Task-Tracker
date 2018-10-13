@@ -6,7 +6,7 @@
 
 input[name='taskdescription'] {
     margin-top: 7%;
-    width: 95%;
+    width: 90%;
 }
 
 li {
@@ -18,7 +18,7 @@ li {
 }
 
 .alert {
-    width: 95%;
+    width: 90%;
 }
 
 .container {
