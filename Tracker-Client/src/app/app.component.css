@@ -1,19 +1,12 @@
-#stopbtn, #resumebtn {
-    margin-left: 2.5%;
-}
-
 #startbtn, #stopbtn, #resumebtn {
     margin-top: 3%;
+    width: 30%;
     color: white;
-}
-
-#taskList {
-    margin-top: 2.5%;
 }
 
 input[name='taskdescription'] {
     margin-top: 7%;
-    width: 85%;
+    width: 95%;
 }
 
 li {
@@ -25,5 +18,17 @@ li {
 }
 
 .alert {
-    width: 85%;
+    width: 95%;
+}
+
+.container {
+    margin-top: 5%;
+}
+
+.form-group {
+    margin-top: 0.75rem;
+}
+
+.fa-search {
+    padding-top: 0.75rem;
 }
