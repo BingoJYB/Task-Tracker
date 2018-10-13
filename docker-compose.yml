@@ -1,15 +1,15 @@
 version: "2"
 services:
   client:
-    image: bingojyb/time-tracker-client:0.0.1
+    image: bingojyb/time-tracker-client
     ports:
       - "4200:4200"
 
   server:
-    image: bingojyb/time-tracker-server:0.0.1
+    image: bingojyb/time-tracker-server
     ports:
       - "3000:3000"
-    depends_on:
+    links:
       - db
 
   db:
