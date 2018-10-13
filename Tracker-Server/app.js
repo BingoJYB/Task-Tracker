@@ -10,7 +10,7 @@ let deleteRouter = require('./routes/delete');
 let app = express();
 
 // Set up database
-mongoClient.connect('mongodb://localhost:27017/mydb', {useNewUrlParser: true}, (err, db) => {
+mongoClient.connect('mongodb://db/mydb', {useNewUrlParser: true}, (err, db) => {
     if (err) throw err;
 
     let mydb = db.db('mydb');
