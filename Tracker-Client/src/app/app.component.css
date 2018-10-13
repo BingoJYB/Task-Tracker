@@ -7,14 +7,6 @@
     color: white;
 }
 
-.btn-group.special {
-    display: flex;
-}
-
-.special .btn {
-    flex: 1;
-}
-
 #taskList {
     margin-top: 2.5%;
 }
